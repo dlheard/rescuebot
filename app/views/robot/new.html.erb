@@ -1,0 +1,111 @@
+<html>
+
+
+<%= render 'layouts/comments_partial' %>
+<%= render 'layouts/gps_partial' %>
+
+<style>
+.video_frame{
+
+    margin-top: 15%;
+    margin-left: 30%;
+    height: 100%;
+    border-radius: 0px;
+    background-color: #f2f2f2;
+    padding: 0px;
+}
+
+</style>
+
+
+<script>
+
+
+document.onkeydown = checkKey;
+
+
+function checkKey(e) {
+
+	e = e || window.event;
+
+
+	 // up arrow
+	 // send json of form
+	 // {"key": "up"}
+    if (e.keyCode == '38') {
+    	key = {"key": "up"};
+    	send_key_motors(key);
+
+    }
+
+    // down arrow
+    else if (e.keyCode == '40') {
+    	key = {"key": "down"};
+    	send_key_motors(key);
+
+    }
+
+     // left arrow
+    else if (e.keyCode == '37') {
+    	key = {"key": "left"};
+    	send_key_motors(key);
+
+    }
+     // right arrow
+    else if (e.keyCode == '39') {
+    	key = {"key": "right"};
+    	send_key_motors(key);
+
+    }
+
+    // Q arrow for moving camera left
+    else if (e.keyCode == '81') {
+    	key = {"key": "left"};
+    	send_key_camera(key);
+
+
+    }
+
+    // W arrow for moving camera right
+    else if (e.keyCode == '87') {
+    	key = {"key": "right"};
+    	send_key_camera(key);
+
+    }
+
+
+
+}
+
+
+
+function send_key_motors(key) {
+    return $.ajax({
+        url: '/robot/motors',
+        dataType: 'json',
+        type: 'POST',
+        data: key
+    });
+}
+
+
+
+function send_key_camera(key) {
+    return $.ajax({
+        url: '/robot/camera',
+        dataType: 'json',
+        type: 'POST',
+        data: key
+    });
+}
+
+
+</script>
+
+
+
+
+
+
+
+</html>
