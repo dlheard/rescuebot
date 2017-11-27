@@ -27,10 +27,10 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: rescue_admin
-  password: worldsbestsoccerplayer
-  host: localhost
+  username: afall
+  password: eecs473robot
+  host: 35.194.35.11
 
-development: 
+development:
   <<: *default
   database: RescueBot
