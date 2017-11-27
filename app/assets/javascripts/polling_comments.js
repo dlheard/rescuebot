@@ -29,10 +29,14 @@ window.Poller = {
       data: {"after_id": first_id}
     });
     var element = document.getElementById("comments_box");
-    if(element.scrollTop < element.scrollHeight - 500){
+ /*   console.log("trying scroll");
+    console.log(element.scrollTop);
+    console.log(element.scrollHeight);
+    if(element.scrollTop > element.scrollHeight - 500){
     	var elm = document.getElementById("comments_box");
         elm.scrollTop = elm.scrollHeight;
-    }
+	console.log("scrolled");
+    } */
   }
 };
 
