@@ -16,5 +16,15 @@ var item = '<li style="width:100%;" data-id=' + comment_data_id + '>' +
 $('#ul1').append(item)
 
 <% end %>
-
+    var element = document.getElementById("comments_box");
+ 
+    console.log("trying scroll2");
+    console.log(element.scrollTop);
+    console.log(element.scrollHeight);
+    if(element.scrollTop > element.scrollHeight - 500){
+    	var elm = document.getElementById("comments_box");
+        elm.scrollTop = elm.scrollHeight;
+	console.log("scrolled");
+ 
 Poller.poll();
+
