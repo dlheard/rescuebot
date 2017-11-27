@@ -17,14 +17,8 @@ $('#ul1').append(item)
 
 <% end %>
     var element = document.getElementById("comments_box");
- 
-    console.log("trying scroll2");
-    console.log(element.scrollTop);
-    console.log(element.scrollHeight);
     if(element.scrollTop > element.scrollHeight - 500){
-    	var elm = document.getElementById("comments_box");
-        elm.scrollTop = elm.scrollHeight;
-	console.log("scrolled");
+        element.scrollTop = element.scrollHeight;
  
 Poller.poll();
 
