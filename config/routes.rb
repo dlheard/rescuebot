@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   post '/comment'  =>  'robot#comment'
 
+  post '/robot/gps' => 'robot#gps'
+
 
 
   # post request path from front end to move motors

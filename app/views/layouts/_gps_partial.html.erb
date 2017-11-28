@@ -1,18 +1,17 @@
 
 <!doctype html>
 <html>
-  <head>
-    <title>Google Maps Example</title>
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.4.1.min.js"></script>
-  </head>
+
   <body>
     <div class="container">
       <div id="map-canvas" style="width:400px;height:300px;position:absolute;top:250px;right:900px;border-color:black;border-style:solid;border-width:2px"></div>
     </div>
 
     <script>
-    window.lat = 42.2808;
-    window.lng = -83.7430;
+    $(document).on('turbolinks:load', function() {
+
+    window.lat = 42.293285;
+    window.lng = -83.716024;
     var map;
     var mark;
     var lineCoords = [];
@@ -38,15 +37,53 @@
     };
     var pnChannel = "map-channel";
     var pubnub = new PubNub({
-      publishKey: 'pub-c-63a3f323-d059-4d0f-8f0e-401f7550d252',
-      subscribeKey: 'sub-c-13e5005a-c02b-11e7-95b9-9a1739043280'
+      publishKey: 'pub-c-c6b6f55d-31aa-433c-96cf-b88cc4f872a8',
+      subscribeKey: 'sub-c-27220282-cf06-11e7-af7b-be475446d620'
     });
     pubnub.subscribe({channels: [pnChannel]});
     pubnub.addListener({message:redraw});
     setInterval(function() {
-      pubnub.publish({channel:pnChannel, message:{lat:window.lat + 0.001, lng:window.lng + 0.01}});
-    }, 5000);
+        var gps_data = get_lat_lon();
+        gps_data.pipe(function(result){
+        return result.GPS_DATA;
+        }).then(function(data_string) {
+        var parse_data_arr = data_string.split(" ");
+        if (Number(parse_data_arr[0]) != 0 && Number(parse_data_arr[1]) != 0){
+        //var new_lat = Number(parse_data_arr[0])/100.0;
+        //var new_lon = -1*Number(parse_data_arr[1])/100.0;
+            var lat_deg = Math.floor(Number(parse_data_arr[0])/100);
+            var lat_min = Math.floor(Number(parse_data_arr[0])-lat_deg*100);
+            var lat_sec = Number(parse_data_arr[0])-lat_deg*100-lat_min;
+            var new_lat = lat_deg + lat_min/60 + lat_sec/36-0.0062;
+
+            var lon_deg = Math.floor(Number(parse_data_arr[1])/100);
+            var lon_min = Math.floor(Number(parse_data_arr[1])-lon_deg*100);
+            var lon_sec = Number(parse_data_arr[1])-lon_deg*100-lon_min;
+            var new_lon = -1*(lon_deg + lon_min/60 + lon_sec/36-0.0105);
+            //alert(new_lat + " " + new_lon);
+        
+            pubnub.publish({channel:pnChannel, message:{lat: new_lat, lng: new_lon}});
+        }
+
+    });
+
+    }, 10000);
+
+    });
+
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB1fMXWSYiJaATLygJovR63b-JSAQqfwIo&callback=initialize"></script>
+    
+    <script> 
+    function get_lat_lon(){
+        return $.ajax({
+            url: '/robot/gps',
+            dataType: 'json',
+            type: 'POST'
+        });
+    }
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDqvgtjJ9ZtdoAXCVUMDSJl9rHyDcx2ZA4&callback=initialize"></script>
+    
   </body>
 </html>
