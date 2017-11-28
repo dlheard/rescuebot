@@ -128,6 +128,19 @@ class RobotController < ApplicationController
 
  	end
 
+    def gps
+        url = URI.parse("35.0.22.71/api/v1/gps")
+        http = Net::HTTP.new(url.host,url.port)
+        request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
+        response = http.request(request)
+        gps_data = response.body
+        if(gps_data["GPS_DATA"] == " " or gps_data["GPS_DATA"] == "")
+            gps_data["GPS_DATA"] = "0 0"
+        end
+        render :json => gps_data
+
+    end
+
 
 
 

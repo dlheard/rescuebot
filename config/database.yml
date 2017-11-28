@@ -28,7 +28,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: afall
-  password:
+  password: eecs473robot
   host: 35.194.35.11
 
 development:
