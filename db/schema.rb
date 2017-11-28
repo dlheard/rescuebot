@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20171111202523) do
 
-  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "user_id"
     t.string "username"
     t.string "content"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20171111202523) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "robots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "robots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "robot_url"
     t.integer "available", default: 0
     t.integer "lon", default: -1
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171111202523) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "username"
     t.string "avatar_url", default: "https://i.pinimg.com/736x/5d/a0/8d/5da08d24bc4c7d2847ee5dfa1604b114--naruto-shippudden-naruto-pics.jpg"
     t.string "email"
