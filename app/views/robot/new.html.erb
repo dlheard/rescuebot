@@ -58,20 +58,49 @@ function checkKey(e) {
 
     }
 
+    else if (e.keyCode == '32') {
+        key = {"key": "stop"};
+        send_key_motors(key);
+    }
+
     // Q arrow for moving camera left
-    else if (e.keyCode == '81') {
+    else if (e.keyCode == '65') {
     	key = {"key": "left"};
-    	send_key_camera(key);
+    	send_key_camera_1(key);
 
 
     }
 
     // W arrow for moving camera right
-    else if (e.keyCode == '87') {
+    else if (e.keyCode == '68') {
     	key = {"key": "right"};
-    	send_key_camera(key);
+    	send_key_camera_1(key);
 
     }
+
+    else if (e.keyCode == '87'){
+        key = {"key": "up"};
+        send_key_camera_2(key);
+
+    }
+
+    else if (e.keyCode == '83') {
+        key = {"key": "down"};
+        send_key_camera_2(key);
+
+    }  
+
+    else if (e.keyCode == '188') {
+        key = {"speed": "down"};
+        motor_speed(key);
+    } 
+
+    else if (e.keyCode == '190') {
+        key = {"speed": "up"};
+        motor_speed(key);
+    }
+
+
 
 
 
@@ -90,9 +119,27 @@ function send_key_motors(key) {
 
 
 
-function send_key_camera(key) {
+function send_key_camera_1(key) {
     return $.ajax({
-        url: '/robot/camera',
+        url: '/robot/camera/1',
+        dataType: 'json',
+        type: 'POST',
+        data: key
+    });
+}
+
+function send_key_camera_2(key) {
+    return $.ajax({
+        url: '/robot/camera/2',
+        dataType: 'json',
+        type: 'POST',
+        data: key
+    });
+}
+
+function motor_speed(key) {
+    return $.ajax({
+        url: '/robot/motor/speed',
         dataType: 'json',
         type: 'POST',
         data: key

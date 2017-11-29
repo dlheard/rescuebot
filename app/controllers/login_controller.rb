@@ -21,6 +21,8 @@ skip_before_action :require_login, only: [:login,:login_create]
                 session[:username] = @verify_user.username
                 session[:signed_in] = true
                 session[:avatar_url] = @verify_user.avatar_url
+                session[:control_robot] = "false"
+                session[:robot_url] = ""
                 redirect_to root_path
             else 
                 flash[:notice] = "incorrect password try again"
@@ -35,6 +37,17 @@ skip_before_action :require_login, only: [:login,:login_create]
 
     def logout 
         session[:signed_in] = false
+        if(session[:control_robot] == "true")
+            robot_url = session[:robot_url]
+            link = "#{robot_url}/api/v1/robot/enable" #enable availability of robot
+            url = URI.parse(link)
+            http = Net::HTTP.new(url.host, url.port)
+            request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
+            response = http.request(request) 
+            response_json = JSON.parse(response.body) 
+            session[:robot_url] = ""
+            session[:control_robot] = "false"
+        end
         redirect_to root_path
     end
 

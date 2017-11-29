@@ -19,6 +19,8 @@ skip_before_action :verify_authenticity_token
 			@robot.save	
  		end
 
+ 		redirect_to root_path
+
  	end 
 
 

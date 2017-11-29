@@ -26,7 +26,11 @@ Rails.application.routes.draw do
 
   get '/robot/index' =>  'robot#index'
 
-  post '/robot/camera'  =>  'robot#control_camera'
+  post '/robot/camera/1'  =>  'robot#control_camera_1'
+
+  post '/robot/camera/2'  =>  'robot#control_camera_2'
+
+  post '/robot/motor/speed' =>  'robot#motor_speed'
 
   get '/add/robot'   =>   'add_robot#add'
 

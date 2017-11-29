@@ -7,7 +7,7 @@ class RegisterController < ApplicationController
 
     end
 
-	def create_user  
+    def create_user  
     flash[:error] = nil
     flash[:notice] = nil
     
@@ -27,6 +27,8 @@ class RegisterController < ApplicationController
             session[:signed_in] = true
             session[:username] = params[:name]
             session[:avatar_url] = @user.avatar_url
+            session[:control_robot] = "false"
+            session[:robot_url] = ""
             redirect_to root_path
 
             # later on check response[error]? if its there flash a message
