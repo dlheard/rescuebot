@@ -53,7 +53,7 @@ class RobotController < ApplicationController
                 rand_num = (rand() * 100).to_i  
                 mod_2 = rand_num % 2
                 if(mod_2 == 0)
-                    session[:robot_url] = "http://35.3.72.108"
+                    session[:robot_url] = "http://35.3.127.236"
                 else session[:robot_url] = "http://35.3.105.240"
                 end
             end
@@ -145,20 +145,20 @@ class RobotController < ApplicationController
              http = Net::HTTP.new(url.host,url.port)
              request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
              msg = 0
-             if(params[:key] == "down")
+             if(params[:speed] == "down")
                 if(@@motor_speed != 0)
                    @@motor_speed = @@motor_speed - 30
                    msg = @@motor_speed
                 else msg = 0
                 end
-             elsif (params[:key] == "up")
+             elsif (params[:speed] == "up")
                 if(@@motor_speed != 180)
                    @@motor_speed = @@motor_speed + 30
                    msg = @@motor_speed
                 else msg = 180
                 end
              end
-             send_req = {:key => msg}
+             send_req = {:speed => msg}
              request.body = send_req.to_json
              response = http.request(request)
              response_json = JSON.parse(response.body)
@@ -184,6 +184,8 @@ class RobotController < ApplicationController
                 msg = "up"
              elsif(params[:key] == "down")
                 msg = "down"
+             elsif(params[:key] == "stop")
+                msg = "stop"
              end
              send_req = {:key => msg}
              request.body = send_req.to_json
