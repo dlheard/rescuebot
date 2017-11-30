@@ -23,34 +23,34 @@ class RobotController < ApplicationController
     def check_all_robots
         if(session[:control_robot] == "false")
             @robot = Robot.new
-            @robots = Robot.all  
-            #request should return json indicating 
+            @robots = Robot.all
+            #request should return json indicating
             #whether robot is available or not
             # {"available": false} or {"available": true}
            robot_control = 0
-            @robots.each do |robot_link| 
+            @robots.each do |robot_link|
                 link = "#{robot_link.robot_url}/api/v1/robot/available"
                 url = URI.parse(link)
                 http = Net::HTTP.new(url.host, url.port)
                 request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
-                response = http.request(request) 
-                response_json = JSON.parse(response.body) 
+                response = http.request(request)
+                response_json = JSON.parse(response.body)
 
                 if response_json["available"] == 1
                     link = "#{robot_link.robot_url}/api/v1/robot/dissable" #dissable availability of robot
                     url = URI.parse(link)
                     http = Net::HTTP.new(url.host, url.port)
                     request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
-                    response = http.request(request) 
-                    response_json = JSON.parse(response.body) 
+                    response = http.request(request)
+                    response_json = JSON.parse(response.body)
                     session[:control_robot] = "true"
                     session[:robot_url] = robot_link.robot_url
                     robot_control = 1
-                    return 
+                    return
                end
             end
             if(robot_control == 0)
-                rand_num = (rand() * 100).to_i  
+                rand_num = (rand() * 100).to_i
                 mod_2 = rand_num % 2
                 if(mod_2 == 0)
                     session[:robot_url] = "http://35.3.127.236"
@@ -58,16 +58,23 @@ class RobotController < ApplicationController
                 end
             end
         end
-    end 
+    end
 
 
  	def new
         check_all_robots() #returns link of first available robot in database
+        if(session[:control_robot] == "true")
+            flash[:notice_1] = "Congrats!"
+            flash[:notice_2] = "There is a robot available for you to control."
+        else
+            flash[:notice_1] = "Sorry!"
+            flash[:notice_2] = "There are no robots available but you can spectate."
+        end
         if(session[:robot_url] != "")
             robot_url = session[:robot_url]
             @video_url = "#{robot_url}:9000/?action=stream"
         end
-        
+
         if(session[:control_robot] == "true")
             robot_url = session[:robot_url]
             endpoint = "#{robot_url}/api/v1/setup/camera"

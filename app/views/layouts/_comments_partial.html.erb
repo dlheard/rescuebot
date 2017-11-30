@@ -164,8 +164,41 @@ input:focus{
     background-color: rgba(0, 30, 34, 0.85);
 }
 
+.alert {
+    padding: 20px;
+    background-color: #2fcbe0;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
 </style>
     <body>
+        <% if flash[:notice_1] %>
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong><%= flash[:notice_1] %></strong> <%=flash[:notice_2] %>
+            </div>
+
+        <% end %>
         <img class="videofeed" src=<%= @video_url %>>
 
         <button id="chatbutton" class="chatbutton">CHAT <strong>ON</strong></button>
