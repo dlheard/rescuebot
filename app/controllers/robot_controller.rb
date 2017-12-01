@@ -53,7 +53,7 @@ class RobotController < ApplicationController
                 rand_num = (rand() * 100).to_i
                 mod_2 = rand_num % 2
                 if(mod_2 == 0)
-                    session[:robot_url] = "http://35.3.127.236"
+                    session[:robot_url] = "http://35.3.22.126"
                 else session[:robot_url] = "http://35.3.105.240"
                 end
             end
