@@ -21,7 +21,6 @@ window.Poller = {
   },
   request: function() {
     var first_id;
-    console.log("hi")
     first_id = $("#ul1 li:last-child").data('id');
     $.ajax({
       type: 'GET',

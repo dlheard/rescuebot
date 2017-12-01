@@ -8,7 +8,6 @@
     </div>
 
     <script>
-    $(document).on('turbolinks:load', function() {
 
     window.lat = 42.293285;
     window.lng = -83.716024;
@@ -44,10 +43,12 @@
     pubnub.addListener({message:redraw});
     setInterval(function() {
         var gps_data = get_lat_lon();
+        console.log("gps data:")
         gps_data.pipe(function(result){
         return result.GPS_DATA;
         }).then(function(data_string) {
         var parse_data_arr = data_string.split(" ");
+        console.log(parse_data_arr)
         if (Number(parse_data_arr[0]) != 0 && Number(parse_data_arr[1]) != 0){
         //var new_lat = Number(parse_data_arr[0])/100.0;
         //var new_lon = -1*Number(parse_data_arr[1])/100.0;
@@ -61,7 +62,8 @@
             var lon_sec = Number(parse_data_arr[1])-lon_deg*100-lon_min;
             var new_lon = -1*(lon_deg + lon_min/60 + lon_sec/36-0.0105);
             //alert(new_lat + " " + new_lon);
-        
+            console.log(new_lat)
+            console.log(new_lon)
             pubnub.publish({channel:pnChannel, message:{lat: new_lat, lng: new_lon}});
         }
 
@@ -69,11 +71,10 @@
 
     }, 10000);
 
-    });
 
     </script>
-    
-    <script> 
+
+    <script>
     function get_lat_lon(){
         return $.ajax({
             url: '/robot/gps',
@@ -82,8 +83,8 @@
         });
     }
     </script>
-    
+
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDqvgtjJ9ZtdoAXCVUMDSJl9rHyDcx2ZA4&callback=initialize"></script>
-    
+
   </body>
 </html>
