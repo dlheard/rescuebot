@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 
   post '/robot/camera/2'  =>  'robot#control_camera_2'
 
+  post '/robot/HID/1'    =>  'robot#HID_camera_1'
+
+  post '/robot/HID/2'    =>  'robot#HID_camera_2'
+
   post '/robot/motor/speed' =>  'robot#motor_speed'
 
   get '/add/robot'   =>   'add_robot#add'
