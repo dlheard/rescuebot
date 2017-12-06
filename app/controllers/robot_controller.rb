@@ -75,14 +75,14 @@ class RobotController < ApplicationController
             @video_url = "#{robot_url}:9000/?action=stream"
         end
 
-        if(session[:control_robot] == "true")
-            robot_url = session[:robot_url]
-            endpoint = "#{robot_url}/api/v1/setup/camera"
-            url = URI.parse(endpoint)
-            http = Net::HTTP.new(url.host,url.port)
-            request = Net::HTTP::Post.new(url.path,'Content-Type' => 'application/json')
-            response = http.request(request)
-        end
+        # if(session[:control_robot] == "true")
+        #     robot_url = session[:robot_url]
+        #     endpoint = "#{robot_url}/api/v1/setup/camera"
+        #     url = URI.parse(endpoint)
+        #     http = Net::HTTP.new(url.host,url.port)
+        #     request = Net::HTTP::Post.new(url.path,'Content-Type' => 'application/json')
+        #     response = http.request(request)
+        # end
  		@comments = Comment.all
 		@all_users = User.all
 
@@ -240,7 +240,21 @@ class RobotController < ApplicationController
 
     end
 
-
+    def gas_sensor
+        if(session[:robot_url] != "")
+            print("*****GAS SENSOR*****")
+            robot_url = session[:robot_url]
+            endpoint = "#{robot_url}/api/v1/gasSensor"
+            url = URI.parse(endpoint)
+            http = Net::HTTP.new(url.host, url.port)
+            request = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
+            response = http.request(request)
+            gas_data = response.body
+            print(gas_data["GAS_LEVEL"])
+            render :json => gas_data
+            print(gas_data["GAS_LEVEL"])
+        end
+    end
 
 
 

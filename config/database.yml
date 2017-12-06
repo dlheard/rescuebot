@@ -30,6 +30,9 @@ default: &default
   username: afall
   password: eecs473robot
   host: 35.194.35.11
+  # username: rescue_admin
+  # password: worldsbestsoccerplayer
+  # host: localhost
 
 development:
   <<: *default

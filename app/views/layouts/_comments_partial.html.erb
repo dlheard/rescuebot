@@ -142,6 +142,39 @@ input:focus{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
+.gasbutton{
+    font-family: 'Open Sans';
+    text-align: center;
+    display: inline-block;
+    font-size:16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position:absolute;
+    right:1000px;
+    width:150px;
+    height:50px;
+    top:140px;
+    background-color: rgba(0, 30, 34, 0.85);
+    color:white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.gasbutton:hover{
+    background-color: #2fcbe0;
+    opacity:0.90;
+    color:white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.gasbutton:active{
+    background-color: #2fcbe0;
+    opacity:0.90;
+    color:white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
 .comments_box{
     width:290px;
     height:390px;
@@ -158,8 +191,8 @@ input:focus{
     right:390px;
     height:375px;
     width:500px;
-    -webkit-transform: scaleY(-1);
-    transform: scaleY(-1);
+    -webkit-transform: scaleX(-1) scaleY(-1);
+    transform: scaleX(-1) scaleY(-1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     background-color: rgba(0, 30, 34, 0.85);
 }
@@ -200,6 +233,12 @@ input:focus{
 
         <% end %>
         <img class="videofeed" src=<%= @video_url %>>
+
+
+        <button id="gasbutton" class="gasbutton">
+            <p id="gasvalue"> 0.0 </p>
+            <p> UPDATE GAS</p>
+        </button>
 
         <button id="chatbutton" class="chatbutton">CHAT <strong>ON</strong></button>
         <div id="chatbox" class="col-sm-3 col-sm-offset-4 frame" style="display:none">
@@ -320,6 +359,33 @@ $("#chatbutton").click(function toggleChat() {
         }
     });
 });
+
+
+
+$("#gasbutton").click(function getVal() {
+    console.log("gas clicked");
+    var gas_data = getGAS_ajax();
+
+    gas_data.pipe(function(result){
+        return result.GAS_LEVEL;
+    }).then(function(data_string) {
+        var parse_data_arr = data_string.split(" ");
+        console.log(parse_data_arr)
+        var elm = document.getElementById("gasvalue");
+        // elm.text = "hi";
+        elm.innerHTML = parse_data_arr;
+
+});
+});
+
+function getGAS_ajax() {
+        console.log("inside ajax");
+        return $.ajax({
+            url: '/robot/gas',
+            dataType: 'json',
+            type: 'POST',
+        });
+}
 
 $(".mytext").on("keyup", function(e){
     if (e.which == 13){

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   post '/robot/gps' => 'robot#gps'
 
+  post '/robot/gas' => 'robot#gas_sensor'
 
 
   # post request path from front end to move motors
