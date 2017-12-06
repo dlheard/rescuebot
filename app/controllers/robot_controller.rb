@@ -114,7 +114,22 @@ class RobotController < ApplicationController
              response = http.request(request)
              response_json = JSON.parse(response.body)
         end
- 	end
+ 	end  
+
+    def HID_camera_1
+        if(session[:control_robot] == "true")
+             robot_url = session[:robot_url]
+             endpoint =  "#{robot_url}/api/v1/camera/1"
+             url = URI.parse(endpoint)
+             http = Net::HTTP.new(url.host,url.port)
+             request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
+             msg = params[:key]
+             send_req = {:key => msg}
+             request.body = send_req.to_json
+             response = http.request(request)
+             response_json = JSON.parse(response.body)
+        end
+    end
 
     def control_camera_2
         if(session[:control_robot] == "true")
@@ -137,6 +152,21 @@ class RobotController < ApplicationController
                 else msg = 180
                 end
              end
+             send_req = {:key => msg}
+             request.body = send_req.to_json
+             response = http.request(request)
+             response_json = JSON.parse(response.body)
+        end
+    end
+
+    def HID_camera_2
+        if(session[:control_robot] == "true")
+             robot_url = session[:robot_url]
+             endpoint =  "#{robot_url}/api/v1/camera/2"
+             url = URI.parse(endpoint)
+             http = Net::HTTP.new(url.host,url.port)
+             request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
+             msg = params[:key]
              send_req = {:key => msg}
              request.body = send_req.to_json
              response = http.request(request)
