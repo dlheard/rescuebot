@@ -53,12 +53,12 @@
     background:rgba(0, 30, 34, 0.8);
     border-radius: 25px;
     border-color:#2fcbe0;
-    height:450px;
-    width:300px;
+    height:60%;
+    width:25%;
     overflow:hidden;
     position:absolute;
-    top:200px;
-    right:80px;
+    top:33%;
+    right:2%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 .frame > div:last-of-type{
@@ -82,7 +82,7 @@
     width: 0;
     height: 0;
     content:"";
-    top:-5px;
+    top:-10px;
     left:14px;
     border-style: solid;
     border-width: 13px 13px 0 0;
@@ -118,10 +118,10 @@ input:focus{
     transition-duration: 0.4s;
     cursor: pointer;
     position:absolute;
-    right:155px;
-    width:150px;
-    height:50px;
-    top:140px;
+    right:12%;
+    width:10%;
+    height:8%;
+    top:20%;
     background-color: rgba(0, 30, 34, 0.85);
     color:white;
     border: none;
@@ -151,10 +151,10 @@ input:focus{
     transition-duration: 0.4s;
     cursor: pointer;
     position:absolute;
-    right:1000px;
-    width:150px;
-    height:80px;
-    top:140px;
+    right:75%;
+    width:15%;
+    height:10%;
+    top:20%;
     background-color: rgba(0, 30, 34, 0.85);
     color:white;
     border: none;
@@ -176,21 +176,20 @@ input:focus{
 }
 
 .comments_box{
-    width:290px;
-    height:390px;
+    width:100%;
+    height:87%;
     overflow:auto;
-    display: inline-block;
-    position:fixed;
-    top:205px;
-    right:85px;
+    position: absolute;
+
 }
 
 .videofeed{
     position: absolute;
-    top:200px;
-    right:390px;
-    height:375px;
-    width:500px;
+    display: inline-block;
+    top:30%;
+    right:28%;
+    height:44%;
+    width:44%;
     -webkit-transform: scaleX(-1) scaleY(-1);
     transform: scaleX(-1) scaleY(-1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
@@ -239,10 +238,12 @@ input:focus{
             <p> Gas Level: <p>
             <p id="gasvalue"> LOW - Normal </p>
             <p>(press to update)</p>
+              <div class="progress">
+  </div>
         </button>
 
         <button id="chatbutton" class="chatbutton">CHAT <strong>ON</strong></button>
-        <div id="chatbox" class="col-sm-3 col-sm-offset-4 frame" style="display:none">
+        <div id="chatbox" class="col-sm-3 col-sm-offset-4 frame" style="display:block">
         <div class="comments_box" id="comments_box">
             <ul style="list-style-type:none;margin:5px;padding:0px" class="commentlist" id="ul1">
                     <li style="width:100%" class="pinned_comment">
@@ -271,7 +272,7 @@ input:focus{
 
             </ul>
         </div>
-        <div style="height:50px;background:whitesmoke !important">
+        <div style="height:10%;background:whitesmoke !important">
             <input type="text" class="mytext" placeholder="Type a message"/>
         </div>
         </div>
