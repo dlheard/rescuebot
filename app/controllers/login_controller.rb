@@ -45,9 +45,9 @@ skip_before_action :require_login, only: [:login,:login_create]
             request  = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
             response = http.request(request) 
             response_json = JSON.parse(response.body) 
-            session[:robot_url] = ""
             session[:control_robot] = "false"
         end
+        session[:robot_url] = ""
         redirect_to root_path
     end
 
