@@ -153,7 +153,7 @@ input:focus{
     position:absolute;
     right:1000px;
     width:150px;
-    height:50px;
+    height:80px;
     top:140px;
     background-color: rgba(0, 30, 34, 0.85);
     color:white;
@@ -236,8 +236,9 @@ input:focus{
 
 
         <button id="gasbutton" class="gasbutton">
-            <p id="gasvalue"> 0.0 </p>
-            <p> UPDATE GAS</p>
+            <p> Gas Level: <p>
+            <p id="gasvalue"> LOW - Normal </p>
+            <p>(press to update)</p>
         </button>
 
         <button id="chatbutton" class="chatbutton">CHAT <strong>ON</strong></button>
@@ -373,7 +374,15 @@ $("#gasbutton").click(function getVal() {
         console.log(parse_data_arr)
         var elm = document.getElementById("gasvalue");
         // elm.text = "hi";
-        elm.innerHTML = parse_data_arr;
+        if(parse_data_arr > 9255){
+            elm.innerHTML = "HIGH - Dangerous!!";
+        }
+        else if(parse_data_arr > 8480){
+            elm.innerHTML = "MEDIUM - Caution!";
+        }
+        else{
+            elm.innerHTML = "LOW - Normal";
+        }
 
 });
 });
