@@ -98,13 +98,13 @@ class RobotController < ApplicationController
              msg = 0
              if(params[:key] == "left")
                 if(@@angle_1 != 0)
-                   @@angle_1 = @@angle_1 - 30
+                   @@angle_1 = @@angle_1 - 15
                    msg = @@angle_1
                 else msg = 0
                 end
              elsif (params[:key] == "right")
                 if(@@angle_1 != 180)
-                   @@angle_1 = @@angle_1 + 30
+                   @@angle_1 = @@angle_1 + 15
                    msg = @@angle_1
                 else msg = 180
                 end
@@ -141,13 +141,13 @@ class RobotController < ApplicationController
              msg = 0
              if(params[:key] == "down")
                 if(@@angle_2 != 0)
-                   @@angle_2 = @@angle_2 - 30
+                   @@angle_2 = @@angle_2 - 15
                    msg = @@angle_2
                 else msg = 0
                 end
              elsif (params[:key] == "up")
                 if(@@angle_2 != 180)
-                   @@angle_2 = @@angle_2 + 30
+                   @@angle_2 = @@angle_2 + 15
                    msg = @@angle_2
                 else msg = 180
                 end
