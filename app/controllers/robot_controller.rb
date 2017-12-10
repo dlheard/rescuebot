@@ -72,7 +72,7 @@ class RobotController < ApplicationController
         end
         if(session[:robot_url] != "")
             robot_url = session[:robot_url]
-            @video_url = "#{robot_url}:9000/?action=stream"
+            @video_url = "#{robot_url}"
         end
 
         # if(session[:control_robot] == "true")
@@ -114,7 +114,7 @@ class RobotController < ApplicationController
              response = http.request(request)
              response_json = JSON.parse(response.body)
         end
- 	end  
+ 	end
 
     def HID_camera_1
         if(session[:control_robot] == "true")

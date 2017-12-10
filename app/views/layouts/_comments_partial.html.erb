@@ -144,7 +144,7 @@ input:focus{
 
 .gasbutton{
     font-family: 'Open Sans';
-    text-align: center;
+    text-align: center;ff
     display: inline-block;
     font-size:16px;
     margin: 4px 2px;
@@ -190,8 +190,8 @@ input:focus{
     right:28%;
     height:44%;
     width:44%;
-    -webkit-transform: scaleX(-1) scaleY(-1);
-    transform: scaleX(-1) scaleY(-1);
+/*    -webkit-transform: scaleX(-1) scaleY(-1);
+    transform: scaleX(-1) scaleY(-1);*/
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     background-color: rgba(0, 30, 34, 0.85);
 }
@@ -222,6 +222,12 @@ input:focus{
     color: black;
 }
 
+.iframe_vid{
+    position: absolute;
+    height:100%;
+    width:100%;
+}
+
 </style>
     <body>
         <% if flash[:notice_1] %>
@@ -231,7 +237,9 @@ input:focus{
             </div>
 
         <% end %>
-        <img class="videofeed" src=<%= @video_url %>>
+        <img class="videofeed" src=<%= @video_url %>:90/cam_pic_new.php>
+<!--         <img class="videofeed" src=<%= @video_url %>:9000/?action=stream> -->
+
 
 
         <button id="gasbutton" class="gasbutton">
@@ -280,6 +288,8 @@ input:focus{
 
 
 <script>
+
+// $("#test1").load("http://www.google.com #hplogo");
 
 var me = {};
 me.avatar = "https://vignette.wikia.nocookie.net/naruto/images/b/bb/Itachi.png/revision/latest?cb=20160125182202";
