@@ -243,10 +243,11 @@ input:focus{
 
 
         <button id="gasbutton" class="gasbutton">
-            <p> Gas Level: <p>
-            <p id="gasvalue"> LOW - Normal </p>
+            <p> CO2: <span id="gasvalue"> LOW - Normal </span> </p>
+            <progress id="gas_bar" value="50" max="100"></progress>
             <p>(press to update)</p>
-              <div class="progress">
+
+            <div class="progress">
   </div>
         </button>
 
@@ -384,6 +385,8 @@ $("#gasbutton").click(function getVal() {
         var parse_data_arr = data_string.split(" ");
         console.log(parse_data_arr)
         var elm = document.getElementById("gasvalue");
+        var elm2 = document.getElementById("gas_bar");
+        elm2.value = parse_data.arr/100;
         // elm.text = "hi";
         if(parse_data_arr > 9255){
             elm.innerHTML = "HIGH - Dangerous!!";
